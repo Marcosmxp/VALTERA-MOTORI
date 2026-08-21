@@ -23,9 +23,9 @@ export function VehicleColorPreview({ vehicleSlug, baseImage, imageAlt, colors }
     <div className={styles.controls}>
       <p>Color Intelligence · V0.6</p>
       <h2 id={`colors-${vehicleSlug}`}>{activeColor?.name ?? "Colori"}</h2>
-      <span>Le varianti vengono generate offline con Qwen Image Edit e pubblicate solo dopo revisione. La Vercel non esegue IA durante il click.</span>
+      <span>Le varianti vengono generate offline con Qwen Image Edit e pubblicate solo dopo revisione. Vercel non esegue IA durante il click.</span>
       <div className={styles.swatches} aria-label="Colori disponibili">{colors.map((color, index) => <button key={`${color.name}-${color.hex}`} type="button" onClick={() => setActive(index)} aria-pressed={active === index} className={active === index ? styles.active : ""}><i style={{ background: color.hex }} /><b>{color.name}</b><small>{assets[vehicleSlug]?.[color.name] ? "AI ready" : "palette"}</small></button>)}</div>
-      <small className={styles.note}>Se una variante non è ancora stata validata, il sito conserva la fotografia editoriale originale invece di simulare la pintura via CSS.</small>
+      <small className={styles.note}>Se una variante non è ancora stata validata, il sito conserva la fotografia editoriale originale invece di simulare la vernice via CSS.</small>
     </div>
   </section>;
 }
