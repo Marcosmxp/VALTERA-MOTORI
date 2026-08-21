@@ -1,0 +1,13 @@
+.catalogExplorer { max-width: 1480px; margin: 0 auto; }
+.brandRail { display: flex; gap: 8px; overflow-x: auto; padding: 2px 0 18px; scrollbar-width: thin; }
+.brandRail button { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 10px; min-height: 42px; padding: 0 15px; border: 1px solid currentColor; border-radius: 999px; background: transparent; color: inherit; opacity: .62; cursor: pointer; font-size: 11px; font-weight: 700; transition: background .25s ease, color .25s ease, opacity .25s ease, transform .25s ease; }
+.brandRail button:hover, .brandRail .active { opacity: 1; transform: translateY(-1px); }
+.brandRail .active { background: #0d0d0c; color: #d9ff43; border-color: #0d0d0c; }
+:global(.section-dark) .brandRail .active { background: #d9ff43; color: #0d0d0c; border-color: #d9ff43; }
+.brandRail small { display: grid; place-items: center; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: rgba(127,127,127,.14); font-size: 8px; }
+.selectionMeta { display: flex; justify-content: space-between; gap: 30px; align-items: end; margin: 18px 0 38px; padding: 24px 0; border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; border-color: rgba(127,127,127,.24); }
+.selectionMeta > div { display: grid; gap: 5px; }
+.selectionMeta span { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; opacity: .5; }
+.selectionMeta strong { font-size: clamp(30px,4vw,56px); line-height: .96; letter-spacing: -.045em; font-weight: 500; }
+.selectionMeta p { max-width: 520px; margin: 0; opacity: .58; font-size: 11px; line-height: 1.65; }
+@media (max-width: 720px) { .selectionMeta { align-items: start; flex-direction: column; } .brandRail { margin-right: -18px; } }
