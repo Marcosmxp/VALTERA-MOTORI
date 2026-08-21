@@ -76,7 +76,7 @@ export function PriceHistory({ series, updatedAt }: { series: PriceSeries[]; upd
         <div className={styles.chartLabels}><span>{formatDate(first.date)}</span><span>{euro.format(current.price)}</span><span>{formatDate(current.date)}</span></div>
       </div>
 
-      <p className={styles.note}>Ultimo aggiornamento dataset: {new Intl.DateTimeFormat("it-IT", { dateStyle: "medium", timeStyle: "short" }).format(new Date(updatedAt))}. Il collector conserva solo letture plausibili rispetto all'ultimo prezzo noto; se una fonte cambia struttura o blocca l'accesso, il dato precedente resta invariato.</p>
+      <p className={styles.note}>Ultimo aggiornamento dataset: {new Intl.DateTimeFormat("it-IT", { dateStyle: "medium", timeStyle: "short" }).format(new Date(updatedAt))}. Il collector conserva solo letture plausibili rispetto all&apos;ultimo prezzo noto; se una fonte cambia struttura o blocca l&apos;accesso, il dato precedente resta invariato.</p>
     </div>
   );
 }
