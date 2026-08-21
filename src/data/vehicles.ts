@@ -1,5 +1,6 @@
 export type Vehicle = {
   slug: string;
+  marketplaceSlug?: string;
   brand: string;
   model: string;
   category: "Auto" | "Moto";
@@ -18,6 +19,42 @@ export type Vehicle = {
 
 export const vehicles: Vehicle[] = [
   {
+    slug: "porsche-911-carrera",
+    marketplaceSlug: "porsche-911-carrera",
+    brand: "Porsche",
+    model: "911 Carrera Coupé",
+    category: "Auto",
+    label: "Market Intelligence",
+    price: "€ 132.900*",
+    monthly: "scenario Valtera demo",
+    power: "394 CV",
+    performance: "Price tracked",
+    drivetrain: "RWD",
+    status: "Marketplace V0.4",
+    image: "https://images.unsplash.com/photo-1775582524168-75b2c30e016f?auto=format&fit=crop&fm=jpg&q=82&w=2200",
+    imageAlt: "Porsche 911 nero esposto in showroom",
+    imagePage: "https://unsplash.com/photos/OMSIShXyzi0",
+    credit: "Ishaan Sen",
+  },
+  {
+    slug: "ferrari-296-gtb",
+    marketplaceSlug: "ferrari-296-gtb",
+    brand: "Ferrari",
+    model: "296 GTB",
+    category: "Auto",
+    label: "Hybrid supercar",
+    price: "€ 274.900*",
+    monthly: "scenario Valtera demo",
+    power: "830 CV",
+    performance: "2,9 s",
+    drivetrain: "RWD",
+    status: "Marketplace V0.4",
+    image: "https://images.unsplash.com/photo-1681322540912-cdae3ff40726?auto=format&fit=crop&fm=jpg&q=82&w=2200",
+    imageAlt: "Ferrari 296 GTB rossa in garage",
+    imagePage: "https://unsplash.com/photos/y872ENm67yY",
+    credit: "Piotr AMS",
+  },
+  {
     slug: "porsche-911-carrera-gts",
     brand: "Porsche",
     model: "911 Carrera GTS",
@@ -33,23 +70,6 @@ export const vehicles: Vehicle[] = [
     imageAlt: "Porsche 911 nero esposto in showroom",
     imagePage: "https://unsplash.com/photos/OMSIShXyzi0",
     credit: "Ishaan Sen",
-  },
-  {
-    slug: "ferrari-296-gtb",
-    brand: "Ferrari",
-    model: "296 GTB",
-    category: "Auto",
-    label: "Hybrid supercar",
-    price: "su richiesta*",
-    monthly: "consulenza dedicata",
-    power: "830 CV",
-    performance: "2,9 s",
-    drivetrain: "RWD",
-    status: "Selection demo",
-    image: "https://images.unsplash.com/photo-1681322540912-cdae3ff40726?auto=format&fit=crop&fm=jpg&q=82&w=2200",
-    imageAlt: "Ferrari 296 GTB rossa in garage",
-    imagePage: "https://unsplash.com/photos/y872ENm67yY",
-    credit: "Piotr AMS",
   },
   {
     slug: "porsche-911-gt3",

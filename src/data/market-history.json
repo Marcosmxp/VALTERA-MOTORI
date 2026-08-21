@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "updatedAt": "2026-08-21T17:00:00.000Z",
+  "series": {
+    "valtera-ferrari-demo": [{ "date": "2026-08-21", "price": 274900 }],
+    "autovergiate-296-2025": [{ "date": "2026-08-21", "price": 275000 }],
+    "rossocorsa-296-2024": [{ "date": "2026-08-21", "price": 280000 }],
+    "alvolante-296-benchmark": [{ "date": "2026-08-21", "price": 275100 }],
+    "valtera-porsche-demo": [{ "date": "2026-08-21", "price": 132900 }],
+    "supercar-sm-911-carrera-2025": [{ "date": "2026-08-21", "price": 130900 }],
+    "autotorino-911-carrera-2025": [{ "date": "2026-08-21", "price": 135400 }],
+    "alvolante-911-benchmark": [{ "date": "2026-08-21", "price": 133300 }]
+  }
+}

@@ -33,17 +33,13 @@ export function CinematicShowcase() {
 
   return (
     <section id="selection" ref={sectionRef} className="cinematic" aria-labelledby="cinematic-title">
-      <div className="cinematic-topline"><p className="eyebrow">Valtera Selection · V0.3</p><span>Scorri per esplorare</span></div>
+      <div className="cinematic-topline"><p className="eyebrow">Valtera Selection · V0.4</p><span>Scorri per esplorare</span></div>
       <div ref={trackRef} className="cinematic-track">
-        <article className="cinematic-intro">
-          <p className="eyebrow dark">Curated in Milano</p>
-          <h2 id="cinematic-title">Ogni macchina ha un carattere. Il sito deve fartelo sentire.</h2>
-          <p>La V0.3 unisce showroom editoriale e Market Intelligence: immagini grandi, ritmo, profondità e confronto commerciale verificabile.</p>
-        </article>
+        <article className="cinematic-intro"><p className="eyebrow dark">Curated in Milano</p><h2 id="cinematic-title">Ogni macchina ha un carattere. Ora puoi entrarci dentro.</h2><p>La V0.4 collega lo showroom editoriale alle nuove schede prodotto: scroll tecnico, focus progressivo, storico prezzi e confronto concessionarie.</p></article>
         {featuredVehicles.map((vehicle, index) => (
           <article className="cinematic-panel" key={vehicle.slug}>
             <Image src={vehicle.image} alt={vehicle.imageAlt} fill sizes="85vw" /><div className="cinematic-shade" /><div className="cinematic-index">0{index + 1}</div>
-            <div className="cinematic-copy"><p>{vehicle.brand} · {vehicle.label}</p><h3>{vehicle.model}</h3><div className="cinematic-specs"><span><small>Potenza</small>{vehicle.power}</span><span><small>Performance</small>{vehicle.performance}</span></div><Link href="#contatto">Richiedi una proposta <span>↗</span></Link></div>
+            <div className="cinematic-copy"><p>{vehicle.brand} · {vehicle.label}</p><h3>{vehicle.model}</h3><div className="cinematic-specs"><span><small>Potenza</small>{vehicle.power}</span><span><small>Performance</small>{vehicle.performance}</span></div><Link href={vehicle.marketplaceSlug ? `/marketplace/${vehicle.marketplaceSlug}` : "/#contatto"}>{vehicle.marketplaceSlug ? "Apri scheda prodotto" : "Richiedi una proposta"} <span>↗</span></Link></div>
             <a className="photo-credit" href={vehicle.imagePage} target="_blank" rel="noreferrer">Foto · {vehicle.credit}</a>
           </article>
         ))}
