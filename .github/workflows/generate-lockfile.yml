@@ -5,17 +5,19 @@ on:
     branches: [main]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   lockfile:
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Checkout
+      - name: Checkout PR branch
         uses: actions/checkout@v6
         with:
-          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.ref }}
+          persist-credentials: true
 
       - name: Setup Node
         uses: actions/setup-node@v6
@@ -26,10 +28,15 @@ jobs:
       - name: Generate package-lock.json
         run: npm install --package-lock-only --ignore-scripts
 
-      - name: Upload lockfile
-        uses: actions/upload-artifact@v4
-        with:
-          name: npm-lockfile
-          path: package-lock.json
-          if-no-files-found: error
-          retention-days: 1
+      - name: Commit lockfile when changed
+        shell: bash
+        run: |
+          git add -- package-lock.json
+          if git diff --cached --quiet; then
+            echo "Lockfile already up to date"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: add reproducible npm lockfile"
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
