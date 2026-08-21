@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "verifiedAt": "2026-08-21",
+  "sources": [
+    { "id": "autovergiate-296-2025", "kind": "dealer", "url": "https://www.autoscout24.it/annunci/ferrari-296-gtb-blu-pozzi-iva-esp-full-carbon-spec-elettrica-benzina-blu-azzurro-cat_ma27mo76862-e9979ae0-fd06-476d-9cea-85d38a222483", "baselinePrice": 275000, "contains": ["296"] },
+    { "id": "rossocorsa-296-2024", "kind": "dealer", "url": "https://www.rossocorsa.it/vetrina/1923-ferrari-296-milanomissaglia", "baselinePrice": 280000, "contains": ["296"] },
+    { "id": "supercar-sm-911-carrera-2025", "kind": "dealer", "url": "https://www.supercar.sm/l/porsche/", "baselinePrice": 130900, "contains": ["Porsche"] },
+    { "id": "autotorino-911-carrera-2025", "kind": "dealer", "url": "https://www.autotorino.it/veicoli/auto/porsche/911-carrera-coupe/usato/veicolo-911-coupe-3-0-carrera-394cv-auto-u1233307", "baselinePrice": 135400, "contains": ["911"] },
+    { "id": "porsche-macan-listino", "kind": "official-list", "url": "https://www.porsche.com/italy/models/macan/", "baselinePrice": 85899, "contains": ["Macan"] },
+    { "id": "porsche-macan4-listino", "kind": "official-list", "url": "https://www.porsche.com/italy/models/macan/macan-electric-models/macan-4-electric/", "baselinePrice": 89590, "contains": ["Macan 4"] },
+    { "id": "porsche-macan4s-listino", "kind": "official-list", "url": "https://www.porsche.com/italy/models/macan/macan-electric-models/macan-4s-electric/", "baselinePrice": 96312, "contains": ["Macan 4S"] },
+    { "id": "porsche-macan-gts-listino", "kind": "official-list", "url": "https://www.porsche.com/italy/models/macan/macan-electric-models/macan-gts-electric/", "baselinePrice": 111568, "contains": ["Macan GTS"] },
+    { "id": "porsche-macan-turbo-listino", "kind": "official-list", "url": "https://www.porsche.com/italy/models/macan/macan-electric-models/macan-turbo-electric/", "baselinePrice": 124462, "contains": ["Macan Turbo"] },
+    { "id": "fiat-grande-panda-benzina-promo", "kind": "promo", "url": "https://www.fiat.it/offerte-privati/grande-panda-benzina", "baselinePrice": 14950, "contains": ["Grande Panda", "14.950"] },
+    { "id": "fiat-grande-panda-hybrid-promo", "kind": "promo", "url": "https://www.fiat.it/offerte-privati/grande-panda-hybrid", "baselinePrice": 17450, "contains": ["Grande Panda", "Hybrid"] },
+    { "id": "fiat-grande-panda-electric-promo", "kind": "promo", "url": "https://www.fiat.it/offerte-privati/grande-panda-electric", "baselinePrice": 20950, "contains": ["Grande Panda", "Elettrica"] },
+    { "id": "fiat-pandina-hybrid-promo", "kind": "promo", "url": "https://www.fiat.it/offerte-privati/nuova-fiat-pandina", "baselinePrice": 9950, "minPrice": 8000, "contains": ["Pandina"] },
+    { "id": "fiat-500-dolcevita-promo", "kind": "promo", "url": "https://www.fiat.it/offerte-privati/finanziamento-fiat-500-hybrid-dolcevita", "baselinePrice": 19950, "contains": ["500 Hybrid", "Dolcevita"] },
+    { "id": "fiat-600-hybrid-promo", "kind": "promo", "url": "https://www.fiat.it/offerte-privati/600-hybrid", "baselinePrice": 19950, "contains": ["600 Hybrid"] },
+    { "id": "alfa-junior-ibrida-sprint-promo", "kind": "promo", "url": "https://www.alfaromeo.it/models/junior-ibrida", "baselinePrice": 27950, "contains": ["JUNIOR", "IBRIDA"] },
+    { "id": "alfa-junior-q4-ti-promo", "kind": "promo", "url": "https://www.alfaromeo.it/modelli/junior-ibrida-q4", "baselinePrice": 30950, "contains": ["JUNIOR", "Q4"] },
+    { "id": "panigale-v4s-listino", "kind": "moto-list", "url": "https://www.moto.it/moto-nuove/ducati/panigale-v4/gEopnx", "baselinePrice": 34690, "contains": ["Panigale"] },
+    { "id": "monster-890-listino", "kind": "moto-list", "url": "https://www.moto.it/moto-nuove/ducati/monster-890/RG6aTE", "baselinePrice": 12980, "contains": ["Monster"] },
+    { "id": "s1000rr-listino", "kind": "moto-list", "url": "https://www.moto.it/moto-nuove/bmw/s-1000-rr", "baselinePrice": 21650, "contains": ["S 1000 RR"] },
+    { "id": "rs660-listino", "kind": "moto-list", "url": "https://www.moto.it/listino/aprilia/rs-660/rs-660-2025-26/NgvmKd", "baselinePrice": 11900, "contains": ["RS 660"] },
+    { "id": "mt09sp-listino", "kind": "moto-list", "url": "https://www.moto.it/listino/yamaha/mt-09/mt-09-sp-2024-26/uZdzRZ", "baselinePrice": 13099, "contains": ["MT-09"] },
+    { "id": "z900-listino", "kind": "moto-list", "url": "https://www.moto.it/listino/kawasaki/z-900/z-900-2025-26/FB2IYj", "baselinePrice": 9990, "minPrice": 8000, "contains": ["Z 900"] }
+  ]
+}
