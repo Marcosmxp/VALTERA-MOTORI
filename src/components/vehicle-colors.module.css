@@ -1,0 +1,13 @@
+.colors { display: grid; gap: 14px; padding: 20px 0; border-top: 1px solid rgba(255,255,255,.14); border-bottom: 1px solid rgba(255,255,255,.14); }
+.heading { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
+.heading span, .heading small { font-size: 9px; letter-spacing: .12em; text-transform: uppercase; opacity: .56; }
+.heading strong { font-size: 12px; font-weight: 700; }
+.swatches { display: flex; flex-wrap: wrap; gap: 9px; }
+.swatches button { width: 32px; height: 32px; padding: 4px; border-radius: 50%; border: 1px solid rgba(255,255,255,.18); background: transparent; cursor: pointer; transition: transform .25s ease, border-color .25s ease; }
+.swatches button:hover, .swatches .active { transform: scale(1.08); border-color: #d9ff43; }
+.swatches i { display: block; width: 100%; height: 100%; border-radius: 50%; border: 1px solid rgba(255,255,255,.2); box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); }
+.colors p { max-width: 650px; margin: 0; color: rgba(255,255,255,.52); font-size: 10px; line-height: 1.55; }
+.compact { gap: 8px; padding: 12px 0 0; border-top: 1px solid rgba(13,13,12,.12); border-bottom: 0; color: inherit; }
+.compact .swatches { gap: 6px; }
+.compact .swatches button { width: 24px; height: 24px; padding: 3px; border-color: rgba(13,13,12,.18); }
+.compact .swatches .active { border-color: #0d0d0c; }
