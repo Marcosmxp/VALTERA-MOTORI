@@ -7,7 +7,7 @@ const navigation = [
   ["Selection", "#selection"],
   ["Auto", "#auto"],
   ["Moto", "#moto"],
-  ["Confronta", "#confronta"],
+  ["Mercato", "#confronta"],
   ["Showroom", "#showroom"],
 ] as const;
 
