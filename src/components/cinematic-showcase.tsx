@@ -33,12 +33,12 @@ export function CinematicShowcase() {
 
   return (
     <section id="selection" ref={sectionRef} className="cinematic" aria-labelledby="cinematic-title">
-      <div className="cinematic-topline"><p className="eyebrow">Valtera Selection · V0.2</p><span>Scorri per esplorare</span></div>
+      <div className="cinematic-topline"><p className="eyebrow">Valtera Selection · V0.3</p><span>Scorri per esplorare</span></div>
       <div ref={trackRef} className="cinematic-track">
         <article className="cinematic-intro">
           <p className="eyebrow dark">Curated in Milano</p>
           <h2 id="cinematic-title">Ogni macchina ha un carattere. Il sito deve fartelo sentire.</h2>
-          <p>La V0.2 trasforma il catalogo in uno showroom editoriale: immagini grandi, ritmo, profondità e call-to-action nel momento giusto.</p>
+          <p>La V0.3 unisce showroom editoriale e Market Intelligence: immagini grandi, ritmo, profondità e confronto commerciale verificabile.</p>
         </article>
         {featuredVehicles.map((vehicle, index) => (
           <article className="cinematic-panel" key={vehicle.slug}>
