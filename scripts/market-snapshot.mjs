@@ -2,13 +2,9 @@ import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 
-const historyPath = path.join(process.cwd(), "src/data/market-history.json");
-const sources = [
-  { id: "autovergiate-296-2025", url: "https://www.autoscout24.it/annunci/ferrari-296-gtb-blu-pozzi-iva-esp-full-carbon-spec-elettrica-benzina-blu-azzurro-cat_ma27mo76862-e9979ae0-fd06-476d-9cea-85d38a222483" },
-  { id: "rossocorsa-296-2024", url: "https://www.rossocorsa.it/vetrina/1923-ferrari-296-milanomissaglia" },
-  { id: "supercar-sm-911-carrera-2025", url: "https://www.supercar.sm/l/porsche/" },
-  { id: "autotorino-911-carrera-2025", url: "https://www.autotorino.it/veicoli/auto/porsche/911-carrera-coupe/usato/veicolo-911-coupe-3-0-carrera-394cv-auto-u1233307" },
-];
+const root = process.cwd();
+const historyPath = path.join(root, "src/data/market-history.json");
+const registryPath = path.join(root, "src/data/market-sources-v06.json");
 
 function normalizePrice(value) {
   if (typeof value === "number") return Math.round(value);
@@ -20,90 +16,131 @@ function normalizePrice(value) {
   return Number.isFinite(parsed) ? Math.round(parsed) : null;
 }
 
-function walk(value, prices) {
+function walk(value, prices, minPrice) {
   if (!value) return;
-  if (Array.isArray(value)) return value.forEach((item) => walk(item, prices));
+  if (Array.isArray(value)) return value.forEach((item) => walk(item, prices, minPrice));
   if (typeof value !== "object") return;
   for (const [key, item] of Object.entries(value)) {
     if (["price", "lowPrice", "highPrice"].includes(key)) {
       const price = normalizePrice(item);
-      if (price && price > 10000) prices.push(price);
+      if (price && price >= minPrice) prices.push(price);
     }
-    walk(item, prices);
+    walk(item, prices, minPrice);
   }
 }
 
-function extractPrices(html) {
+function extractPrices(html, minPrice) {
   const prices = [];
   const jsonLd = /<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
   for (const match of html.matchAll(jsonLd)) {
-    try { walk(JSON.parse(match[1]), prices); } catch { /* malformed third-party JSON-LD */ }
+    try { walk(JSON.parse(match[1]), prices, minPrice); } catch { /* malformed third-party JSON-LD */ }
   }
 
   const moneyPatterns = [
-    /(?:€|EUR)\s*([0-9]{2,3}(?:[.\s][0-9]{3})+)(?:,[0-9]{2})?/gi,
-    /([0-9]{2,3}(?:[.\s][0-9]{3})+)(?:,[0-9]{2})?\s*(?:€|EUR)/gi,
+    /(?:€|EUR)\s*([0-9]{1,3}(?:[.\s][0-9]{3})+)(?:,[0-9]{2})?/gi,
+    /([0-9]{1,3}(?:[.\s][0-9]{3})+)(?:,[0-9]{2})?\s*(?:€|EUR)/gi,
   ];
   for (const pattern of moneyPatterns) {
     for (const match of html.matchAll(pattern)) {
       const price = normalizePrice(match[1]);
-      if (price && price > 10000) prices.push(price);
+      if (price && price >= minPrice) prices.push(price);
     }
   }
   return [...new Set(prices)];
 }
 
-function choosePlausiblePrice(candidates, previous) {
-  const plausible = candidates
+function choosePlausiblePrice(candidates, previous, maxDelta) {
+  return candidates
     .map((price) => ({ price, delta: Math.abs(price - previous) / previous }))
-    .filter((item) => item.delta <= .12)
-    .sort((a, b) => a.delta - b.delta);
-  return plausible[0]?.price ?? null;
+    .filter((item) => item.delta <= maxDelta)
+    .sort((a, b) => a.delta - b.delta)[0]?.price ?? null;
 }
 
 function daysBetween(a, b) {
   return Math.floor((Date.parse(b) - Date.parse(a)) / 86400000);
 }
 
+function hasExpectedTokens(html, tokens = []) {
+  const normalized = html.toLocaleLowerCase("it");
+  return tokens.every((token) => normalized.includes(String(token).toLocaleLowerCase("it")));
+}
+
+function recordPoint(points, date, price) {
+  const existing = points.find((point) => point.date === date);
+  if (existing) {
+    if (existing.price === price) return false;
+    existing.price = price;
+    return true;
+  }
+  points.push({ date, price });
+  points.sort((a, b) => a.date.localeCompare(b.date));
+  return true;
+}
+
+const registry = JSON.parse(await readFile(registryPath, "utf8"));
 const history = JSON.parse(await readFile(historyPath, "utf8"));
+history.version = Math.max(Number(history.version) || 1, 2);
+history.series ??= {};
+
 const today = new Date().toISOString().slice(0, 10);
 let changed = false;
+let fetched = 0;
+let accepted = 0;
+let skipped = 0;
 
-for (const source of sources) {
-  const points = history.series[source.id];
-  if (!Array.isArray(points) || !points.length) {
-    console.warn(`[skip] ${source.id}: missing baseline`);
-    continue;
+for (const source of registry.sources) {
+  const minPrice = source.minPrice ?? 9000;
+  const maxDelta = source.maxDelta ?? (source.kind === "promo" ? 0.22 : 0.15);
+  const points = history.series[source.id] ?? (history.series[source.id] = []);
+
+  if (!points.length) {
+    points.push({ date: registry.verifiedAt ?? today, price: source.baselinePrice });
+    changed = true;
+    console.log(`[baseline] ${source.id}: ${source.baselinePrice}`);
   }
 
   const previous = points[points.length - 1];
   try {
     const response = await fetch(source.url, {
-      headers: { "user-agent": "ValteraMarketMonitor/0.4 (+public price verification)" },
-      signal: AbortSignal.timeout(15000),
+      headers: {
+        "user-agent": "ValteraMarketMonitor/0.6 (+public price verification; portfolio research)",
+        "accept-language": "it-IT,it;q=0.9,en;q=0.6",
+      },
+      signal: AbortSignal.timeout(18000),
       redirect: "follow",
     });
+    fetched += 1;
     if (!response.ok) {
+      skipped += 1;
       console.warn(`[skip] ${source.id}: HTTP ${response.status}`);
       continue;
     }
 
     const html = await response.text();
-    const nextPrice = choosePlausiblePrice(extractPrices(html), previous.price);
+    if (!hasExpectedTokens(html, source.contains)) {
+      skipped += 1;
+      console.warn(`[skip] ${source.id}: expected model tokens not found`);
+      continue;
+    }
+
+    const candidates = extractPrices(html, minPrice);
+    const nextPrice = choosePlausiblePrice(candidates, previous.price, maxDelta);
     if (!nextPrice) {
-      console.warn(`[skip] ${source.id}: no confident price candidate`);
+      skipped += 1;
+      console.warn(`[skip] ${source.id}: no confident candidate near ${previous.price}`);
       continue;
     }
 
     const dueHeartbeat = daysBetween(previous.date, today) >= 7;
     if (nextPrice !== previous.price || dueHeartbeat) {
-      points.push({ date: today, price: nextPrice });
-      changed = true;
+      if (recordPoint(points, today, nextPrice)) changed = true;
+      accepted += 1;
       console.log(`[snapshot] ${source.id}: ${previous.price} -> ${nextPrice}`);
     } else {
       console.log(`[same] ${source.id}: ${nextPrice}`);
     }
   } catch (error) {
+    skipped += 1;
     console.warn(`[skip] ${source.id}: ${error instanceof Error ? error.message : "fetch failed"}`);
   }
 }
@@ -111,7 +148,6 @@ for (const source of sources) {
 if (changed) {
   history.updatedAt = new Date().toISOString();
   await writeFile(historyPath, `${JSON.stringify(history, null, 2)}\n`, "utf8");
-  console.log("Market history updated.");
-} else {
-  console.log("No market history changes.");
 }
+
+console.log(`[summary] registered=${registry.sources.length} fetched=${fetched} accepted=${accepted} skipped=${skipped} changed=${changed}`);
