@@ -6,42 +6,18 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-type RevealProps = PropsWithChildren<{
-  className?: string;
-}>;
+type RevealProps = PropsWithChildren<{ className?: string; distance?: number; delay?: number }>;
 
-export function Reveal({ children, className }: RevealProps) {
+export function Reveal({ children, className, distance = 34, delay = 0 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     if (!ref.current) return;
-
     const media = gsap.matchMedia();
-
     media.add("(prefers-reduced-motion: no-preference)", () => {
-      gsap.fromTo(
-        ref.current,
-        { autoAlpha: 0, y: 32 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.9,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ref.current,
-            start: "top 88%",
-            once: true,
-          },
-        },
-      );
+      const animation = gsap.fromTo(ref.current, { autoAlpha: 0, y: distance }, { autoAlpha: 1, y: 0, delay, duration: 0.95, ease: "power3.out", scrollTrigger: { trigger: ref.current, start: "top 88%", once: true } });
+      return () => animation.kill();
     });
-
     return () => media.revert();
-  }, []);
-
-  return (
-    <div ref={ref} className={className}>
-      {children}
-    </div>
-  );
+  }, [delay, distance]);
+  return <div ref={ref} className={className}>{children}</div>;
 }
