@@ -1,14 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { InventoryVehicle } from "@/data/inventory-v06";
 import type { Vehicle } from "@/data/vehicles";
 import { VehicleColors } from "@/components/vehicle-colors";
 
-type CardVehicle = Vehicle & Partial<Pick<InventoryVehicle, "family" | "priceKind" | "priceVerifiedAt">>;
-
-export function VehicleCard({ vehicle, index = 0 }: { vehicle: CardVehicle; index?: number }) {
+export function VehicleCard({ vehicle, index = 0 }: { vehicle: Vehicle; index?: number }) {
   const productHref = `/marketplace/${vehicle.marketplaceSlug}`;
-  const priceKind = vehicle.priceKind === "promo" ? "Promo verificata" : vehicle.priceKind === "listino" ? "Listino" : "Mercato";
   return (
     <article className="vehicle-card">
       <div className="vehicle-media">
@@ -17,9 +13,9 @@ export function VehicleCard({ vehicle, index = 0 }: { vehicle: CardVehicle; inde
         <a className="photo-credit" href={vehicle.imagePage} target="_blank" rel="noreferrer">Visual · {vehicle.credit}</a>
       </div>
       <div className="vehicle-content">
-        <div className="vehicle-title-row"><div><p className="vehicle-brand">{vehicle.brand}{vehicle.family && vehicle.family !== vehicle.model ? ` · ${vehicle.family}` : ""}</p><h3><Link href={productHref}>{vehicle.model}</Link></h3></div><span className="availability-dot"><i />V0.6</span></div>
-        <div className="vehicle-price"><strong>{vehicle.price}</strong><span>{priceKind} · {vehicle.monthly}</span></div>
-        <dl className="vehicle-specs"><div><dt>Potenza</dt><dd>{vehicle.power}</dd></div><div><dt>DNA</dt><dd>{vehicle.performance}</dd></div><div><dt>Anno</dt><dd>{vehicle.year}</dd></div></dl>
+        <div className="vehicle-title-row"><div><p className="vehicle-brand">{vehicle.brand}</p><h3><Link href={productHref}>{vehicle.model}</Link></h3></div><span className="availability-dot"><i />V0.5</span></div>
+        <div className="vehicle-price"><strong>{vehicle.price}</strong><span>{vehicle.monthly}</span></div>
+        <dl className="vehicle-specs"><div><dt>Potenza</dt><dd>{vehicle.power}</dd></div><div><dt>DNA</dt><dd>{vehicle.performance}</dd></div><div><dt>Trazione</dt><dd>{vehicle.drivetrain}</dd></div></dl>
         <VehicleColors colors={vehicle.colors} compact />
         <div className="vehicle-actions"><Link className="text-link" href={productHref}>Esperienza completa <span>↗</span></Link><Link className="text-link subtle" href={`${productHref}#market-data`}>Confronta prezzi</Link></div>
       </div>

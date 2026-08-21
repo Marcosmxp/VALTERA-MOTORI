@@ -3,6 +3,6 @@ export default function Loading() {
     <div className="loading-brand"><span className="brand-mark" aria-hidden="true">V</span><span>VALTERA MOTORI</span></div>
     <div className="loading-vehicle" aria-hidden="true"><span /><i /></div>
     <div className="loading-line" aria-hidden="true"><span /></div>
-    <div className="loading-status"><span>Inventory Intelligence · Live Market</span><b>V0.6</b></div>
+    <div className="loading-status"><span>Multibrand Market Intelligence</span><b>V0.5</b></div>
   </main>;
 }
