@@ -5,9 +5,22 @@
 .brandRail .active { background: #0d0d0c; color: #d9ff43; border-color: #0d0d0c; }
 :global(.section-dark) .brandRail .active { background: #d9ff43; color: #0d0d0c; border-color: #d9ff43; }
 .brandRail small { display: grid; place-items: center; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: rgba(127,127,127,.14); font-size: 8px; }
+.filterPanel { display: grid; grid-template-columns: minmax(220px, 1.6fr) repeat(6, minmax(115px, .7fr)) auto; gap: 10px; align-items: end; margin: 18px 0 26px; padding: 18px; border: 1px solid rgba(127,127,127,.24); border-radius: 18px; background: rgba(127,127,127,.045); }
+.filterPanel label { display: grid; gap: 7px; min-width: 0; }
+.filterPanel label > span { font-size: 8px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; opacity: .5; }
+.filterPanel input, .filterPanel select { width: 100%; min-height: 42px; border: 1px solid rgba(127,127,127,.28); border-radius: 10px; background: transparent; color: inherit; padding: 0 11px; font: inherit; font-size: 11px; outline: none; }
+.filterPanel input:focus, .filterPanel select:focus { border-color: currentColor; }
+.filterPanel select option { color: #111; background: #fff; }
+.reset { min-height: 42px; padding: 0 15px; border: 1px solid currentColor; border-radius: 10px; background: transparent; color: inherit; cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
 .selectionMeta { display: flex; justify-content: space-between; gap: 30px; align-items: end; margin: 18px 0 38px; padding: 24px 0; border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; border-color: rgba(127,127,127,.24); }
 .selectionMeta > div { display: grid; gap: 5px; }
 .selectionMeta span { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; opacity: .5; }
 .selectionMeta strong { font-size: clamp(30px,4vw,56px); line-height: .96; letter-spacing: -.045em; font-weight: 500; }
-.selectionMeta p { max-width: 520px; margin: 0; opacity: .58; font-size: 11px; line-height: 1.65; }
-@media (max-width: 720px) { .selectionMeta { align-items: start; flex-direction: column; } .brandRail { margin-right: -18px; } }
+.selectionMeta p { max-width: 600px; margin: 0; opacity: .58; font-size: 11px; line-height: 1.65; }
+.empty { min-height: 220px; display: grid; place-items: center; align-content: center; gap: 8px; border: 1px dashed rgba(127,127,127,.35); border-radius: 18px; text-align: center; }
+.empty strong { font-size: 24px; font-weight: 500; }
+.empty span { opacity: .55; font-size: 11px; }
+.empty button { margin-top: 8px; border: 0; background: transparent; color: inherit; text-decoration: underline; cursor: pointer; }
+@media (max-width: 1280px) { .filterPanel { grid-template-columns: repeat(4, minmax(140px, 1fr)); } .search { grid-column: span 2; } }
+@media (max-width: 760px) { .filterPanel { grid-template-columns: 1fr 1fr; padding: 14px; } .search { grid-column: 1 / -1; } .selectionMeta { align-items: start; flex-direction: column; } .brandRail { margin-right: -18px; } }
+@media (max-width: 480px) { .filterPanel { grid-template-columns: 1fr; } .search { grid-column: auto; } }

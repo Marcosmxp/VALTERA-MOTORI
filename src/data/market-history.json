@@ -1,14 +1,29 @@
 {
-  "version": 1,
-  "updatedAt": "2026-08-21T17:00:00.000Z",
+  "version": 2,
+  "updatedAt": "2026-08-21T18:41:00.000Z",
   "series": {
-    "valtera-ferrari-demo": [{ "date": "2026-08-21", "price": 274900 }],
     "autovergiate-296-2025": [{ "date": "2026-08-21", "price": 275000 }],
     "rossocorsa-296-2024": [{ "date": "2026-08-21", "price": 280000 }],
-    "alvolante-296-benchmark": [{ "date": "2026-08-21", "price": 275100 }],
-    "valtera-porsche-demo": [{ "date": "2026-08-21", "price": 132900 }],
     "supercar-sm-911-carrera-2025": [{ "date": "2026-08-21", "price": 130900 }],
     "autotorino-911-carrera-2025": [{ "date": "2026-08-21", "price": 135400 }],
-    "alvolante-911-benchmark": [{ "date": "2026-08-21", "price": 133300 }]
+    "porsche-macan-listino": [{ "date": "2026-08-21", "price": 85899 }],
+    "porsche-macan4-listino": [{ "date": "2026-08-21", "price": 89590 }],
+    "porsche-macan4s-listino": [{ "date": "2026-08-21", "price": 96312 }],
+    "porsche-macan-gts-listino": [{ "date": "2026-08-21", "price": 111568 }],
+    "porsche-macan-turbo-listino": [{ "date": "2026-08-21", "price": 124462 }],
+    "fiat-grande-panda-benzina-promo": [{ "date": "2026-08-21", "price": 14950 }],
+    "fiat-grande-panda-hybrid-promo": [{ "date": "2026-08-21", "price": 17450 }],
+    "fiat-grande-panda-electric-promo": [{ "date": "2026-08-21", "price": 20950 }],
+    "fiat-pandina-hybrid-promo": [{ "date": "2026-08-21", "price": 9950 }],
+    "fiat-500-dolcevita-promo": [{ "date": "2026-08-21", "price": 19950 }],
+    "fiat-600-hybrid-promo": [{ "date": "2026-08-21", "price": 19950 }],
+    "alfa-junior-ibrida-sprint-promo": [{ "date": "2026-08-21", "price": 27950 }],
+    "alfa-junior-q4-ti-promo": [{ "date": "2026-08-21", "price": 30950 }],
+    "panigale-v4s-listino": [{ "date": "2026-08-21", "price": 34690 }],
+    "monster-890-listino": [{ "date": "2026-08-21", "price": 12980 }],
+    "s1000rr-listino": [{ "date": "2026-08-21", "price": 21650 }],
+    "rs660-listino": [{ "date": "2026-08-21", "price": 11900 }],
+    "mt09sp-listino": [{ "date": "2026-08-21", "price": 13099 }],
+    "z900-listino": [{ "date": "2026-08-21", "price": 9990 }]
   }
 }
