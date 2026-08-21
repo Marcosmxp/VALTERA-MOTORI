@@ -1,6 +1,6 @@
 {
   "name": "valtera-motori",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "packageManager": "npm@10.9.8",
   "scripts": {
@@ -9,7 +9,9 @@
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
-    "check": "npm run lint && npm run typecheck && npm run build"
+    "market:validate": "node --check scripts/market-snapshot.mjs && node -e \"JSON.parse(require('fs').readFileSync('src/data/market-sources-v06.json','utf8')); JSON.parse(require('fs').readFileSync('src/data/market-history.json','utf8')); console.log('market data valid')\"",
+    "market:snapshot": "node scripts/market-snapshot.mjs",
+    "check": "npm run market:validate && npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "gsap": "3.15.0",
