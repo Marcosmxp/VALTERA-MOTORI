@@ -107,7 +107,7 @@ export default async function MarketplaceProductPage({ params }: PageProps) {
 
       <section id="proposta" className={styles.conversion}>
         <p>Valtera concierge · V0.4</p>
-        <h2>Dal dettaglio alla decisione, senza rompere l'esperienza.</h2>
+        <h2>Dal dettaglio alla decisione, senza rompere l&apos;esperienza.</h2>
         <span>Il prossimo backend commerciale potrà ricevere richiesta, permuta e test drive. Per ora la CTA resta intenzionalmente non operativa: nessun dato personale viene raccolto.</span>
         <Link href="/#confronta">Torna al mercato ↗</Link>
       </section>
