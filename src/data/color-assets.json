@@ -1,1 +1,11 @@
-{}
+{
+  "ferrari-296-gtb": {
+    "Rosso Corsa": "https://res.cloudinary.com/dgpteian1/image/upload/v1787344397/valtera-v06-ferrari-296-gtb-rosso-corsa.webp",
+    "Giallo Modena": "https://res.cloudinary.com/dgpteian1/image/upload/v1787344546/valtera-v06-ferrari-296-gtb-giallo-modena.webp",
+    "Nero": "https://res.cloudinary.com/dgpteian1/image/upload/v1787344607/valtera-v06-ferrari-296-gtb-nero.webp"
+  },
+  "lamborghini-revuelto": {
+    "Verde": "https://res.cloudinary.com/dgpteian1/image/upload/v1787345228/valtera-v06-lamborghini-revuelto-verde.webp",
+    "Arancio": "https://res.cloudinary.com/dgpteian1/image/upload/v1787345418/valtera-v06-lamborghini-revuelto-arancio.webp"
+  }
+}
