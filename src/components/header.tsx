@@ -4,11 +4,11 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const navigation = [
-  ["Selection", "#selection"],
-  ["Auto", "#auto"],
-  ["Moto", "#moto"],
-  ["Mercato", "#confronta"],
-  ["Showroom", "#showroom"],
+  ["Selection", "/#selection"],
+  ["Auto", "/#auto"],
+  ["Moto", "/#moto"],
+  ["Mercato", "/#confronta"],
+  ["Showroom", "/#showroom"],
 ] as const;
 
 export function Header() {
@@ -52,7 +52,7 @@ export function Header() {
           {navigation.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}
         </nav>
         <div className="header-actions">
-          <Link className="header-cta" href="#contatto">Prenota</Link>
+          <Link className="header-cta" href="/#contatto">Prenota</Link>
           <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="mobile-navigation" aria-label={menuOpen ? "Chiudi menu" : "Apri menu"} onClick={() => setMenuOpen((value) => !value)}><span /><span /></button>
         </div>
         <span className="scroll-progress" ref={progressRef} aria-hidden="true" />
@@ -61,7 +61,7 @@ export function Header() {
         <div className="mobile-menu-inner">
           <p className="eyebrow">Navigazione</p>
           {navigation.map(([label, href], index) => <Link key={href} href={href} onClick={() => setMenuOpen(false)}><span>0{index + 1}</span>{label}</Link>)}
-          <Link className="button button-primary" href="#contatto" onClick={() => setMenuOpen(false)}>Prenota un&apos;esperienza</Link>
+          <Link className="button button-primary" href="/#contatto" onClick={() => setMenuOpen(false)}>Prenota un&apos;esperienza</Link>
         </div>
       </div>
     </>

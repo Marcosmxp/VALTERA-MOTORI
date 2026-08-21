@@ -30,6 +30,9 @@ jobs:
       - name: Audit production dependencies
         run: npm audit --omit=dev --audit-level=high
 
+      - name: Validate market collector
+        run: node --check scripts/market-snapshot.mjs
+
       - name: Lint
         run: npm run lint
 
