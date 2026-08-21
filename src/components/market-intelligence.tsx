@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { marketScenarios } from "@/data/market";
-import { bestRealDealer, calculateSavings, formatEuro, similarityScore } from "@/lib/market";
+import { bestRealDealer, formatEuro, similarityScore } from "@/lib/market";
 import styles from "./market-intelligence.module.css";
 
 function formatKm(value: number) {
@@ -24,7 +24,15 @@ export function MarketIntelligence() {
 
   const valtera = scenario.listings.find((listing) => listing.sellerType === "valtera-demo")!;
   const realDealer = bestRealDealer(scenario.listings);
-  const savings = realDealer ? calculateSavings(realDealer.price, valtera.price) : { amount: 0, percentage: 0 };
+  const priceGap = realDealer ? valtera.price - realDealer.price : 0;
+  const positionAmount = Math.abs(priceGap);
+  const positionPercentage = realDealer ? (positionAmount / realDealer.price) * 100 : 0;
+  const positionLabel = priceGap < 0 ? "Vantaggio Valtera demo" : priceGap > 0 ? "Vantaggio dealer" : "Parità prezzo";
+  const positionCopy = priceGap < 0
+    ? `${positionPercentage.toFixed(2).replace(".", ",")}% in meno rispetto al dealer verificato più economico`
+    : priceGap > 0
+      ? `${positionPercentage.toFixed(2).replace(".", ",")}% sopra il dealer verificato più economico`
+      : "Stesso prezzo del dealer verificato più economico";
 
   return (
     <section id="confronta" className={styles.section} aria-labelledby="market-title">
@@ -58,13 +66,13 @@ export function MarketIntelligence() {
 
         <div className={styles.summary} aria-live="polite">
           <article className={styles.primaryKpi}>
-            <span>Risparmio demo vs migliore dealer verificato</span>
-            <strong>{formatEuro(savings.amount)}</strong>
-            <small>{savings.percentage.toFixed(2).replace(".", ",")}% in meno nello scenario Valtera</small>
+            <span>{positionLabel}</span>
+            <strong>{priceGap < 0 ? "− " : priceGap > 0 ? "+ " : ""}{formatEuro(positionAmount)}</strong>
+            <small>{positionCopy}</small>
           </article>
           <article><span>Scenario Valtera</span><strong>{formatEuro(valtera.price)}</strong><small>non è un’offerta commerciale</small></article>
-          <article><span>Dealer verificato</span><strong>{realDealer ? formatEuro(realDealer.price) : "—"}</strong><small>{realDealer?.seller ?? "nessun dato"}</small></article>
-          <article><span>Fonti confrontate</span><strong>{scenario.listings.length - 1}</strong><small>dealer + benchmark pubblico</small></article>
+          <article><span>Miglior dealer verificato</span><strong>{realDealer ? formatEuro(realDealer.price) : "—"}</strong><small>{realDealer?.seller ?? "nessun dato"}</small></article>
+          <article><span>Fonti confrontate</span><strong>{scenario.listings.length - 1}</strong><small>dealer reali + benchmark pubblico</small></article>
         </div>
 
         <div className={styles.listings}>
@@ -85,6 +93,7 @@ export function MarketIntelligence() {
                     <span>Prezzo</span>
                     <strong>{formatEuro(listing.price)}</strong>
                     {!isDemo && priceDelta > 0 ? <small>+ {formatEuro(priceDelta)} vs Valtera demo</small> : null}
+                    {!isDemo && priceDelta < 0 ? <small>− {formatEuro(Math.abs(priceDelta))} vs Valtera demo</small> : null}
                     {isDemo ? <small>scenario dimostrativo</small> : null}
                   </div>
                 </div>
