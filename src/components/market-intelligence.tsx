@@ -62,7 +62,7 @@ export function MarketIntelligence() {
             <strong>{formatEuro(savings.amount)}</strong>
             <small>{savings.percentage.toFixed(2).replace(".", ",")}% in meno nello scenario Valtera</small>
           </article>
-          <article><span>Scenario Valtera</span><strong>{formatEuro(valtera.price)}</strong><small>non è un'offerta commerciale</small></article>
+          <article><span>Scenario Valtera</span><strong>{formatEuro(valtera.price)}</strong><small>non è un’offerta commerciale</small></article>
           <article><span>Dealer verificato</span><strong>{realDealer ? formatEuro(realDealer.price) : "—"}</strong><small>{realDealer?.seller ?? "nessun dato"}</small></article>
           <article><span>Fonti confrontate</span><strong>{scenario.listings.length - 1}</strong><small>dealer + benchmark pubblico</small></article>
         </div>
@@ -141,7 +141,7 @@ export function MarketIntelligence() {
           <div><span>04</span><strong>Fonte & timestamp</strong><p>Ogni dato reale espone origine e data di verifica.</p></div>
         </aside>
 
-        <p className={styles.disclaimer}>Valtera Motori è un concept portfolio. I prezzi Valtera sono scenari dimostrativi; i prezzi di terzi provengono dalle fonti pubbliche collegate e possono cambiare dopo la data di verifica. Nessuna comparazione costituisce un'offerta di vendita.</p>
+        <p className={styles.disclaimer}>Valtera Motori è un concept portfolio. I prezzi Valtera sono scenari dimostrativi; i prezzi di terzi provengono dalle fonti pubbliche collegate e possono cambiare dopo la data di verifica. Nessuna comparazione costituisce un’offerta di vendita.</p>
       </div>
     </section>
   );
