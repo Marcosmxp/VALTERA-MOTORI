@@ -1,0 +1,36 @@
+name: Apply real vehicle images V0.6
+
+on:
+  push:
+    branches:
+      - fix/real-vehicle-images-v06
+    paths:
+      - scripts/apply-real-images-v06.mjs
+      - .github/workflows/apply-real-images-v06.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply model-specific image mapping
+        run: node scripts/apply-real-images-v06.mjs
+      - name: Commit generated patch
+        run: |
+          if git diff --quiet -- src/data/vehicles.ts; then
+            echo "No image migration changes required."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/vehicles.ts
+          git commit -m "fix: use real model-specific vehicle images"
+          git push
