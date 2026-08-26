@@ -1,3 +1,5 @@
+import { getRealVehicleImage } from "./real-vehicle-images";
+
 export type VehicleColor = { name: string; hex: string };
 export type VehicleCategory = "Auto" | "Moto";
 
@@ -142,17 +144,17 @@ export const vehicles: Vehicle[] = seeds.map(([slug, brand, model, category, seg
   power: `${hp} CV`,
   performance,
   drivetrain,
-  status: "Market Intelligence V0.5",
+  status: "Market Intelligence V0.6",
   year,
   mileageKm,
   powerHp: hp,
   fuel,
   transmission,
   colors: palettes[brand] ?? [{ name: "Nero", hex: "#111111" }, { name: "Bianco", hex: "#eeeeea" }, { name: "Rosso", hex: "#a51622" }],
-  image: images[imageKey],
-  imageAlt: `Visual editoriale per ${brand} ${model}`,
-  imagePage: pageForImage[imageKey],
-  credit: "Unsplash · visual editoriale",
+  image: getRealVehicleImage(slug) ?? images[imageKey],
+  imageAlt: getRealVehicleImage(slug) ? `Foto reale di ${brand} ${model}` : `Visual editoriale per ${brand} ${model}`,
+  imagePage: getRealVehicleImage(slug) ?? pageForImage[imageKey],
+  credit: getRealVehicleImage(slug) ? "Foto reale del modello · asset portfolio" : "Unsplash · visual editoriale",
 }));
 
 export const featuredVehicles = [
