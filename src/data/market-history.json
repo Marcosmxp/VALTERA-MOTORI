@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-18T09:49:43.954Z",
+  "updatedAt": "2026-09-24T10:05:47.307Z",
   "series": {
     "valtera-ferrari-demo": [
       {
@@ -20,6 +20,10 @@
       {
         "date": "2026-09-18",
         "price": 279000
+      },
+      {
+        "date": "2026-09-24",
+        "price": 269999
       }
     ],
     "rossocorsa-296-2024": [
