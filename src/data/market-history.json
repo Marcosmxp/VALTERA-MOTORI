@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-21T10:14:46.627Z",
+  "updatedAt": "2026-10-22T10:15:53.825Z",
   "series": {
     "valtera-ferrari-demo": [
       {
@@ -96,6 +96,10 @@
       {
         "date": "2026-10-16",
         "price": 130900
+      },
+      {
+        "date": "2026-10-22",
+        "price": 130000
       }
     ],
     "autotorino-911-carrera-2025": [
